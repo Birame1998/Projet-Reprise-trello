@@ -95,7 +95,7 @@ main{
 }
 .col{
     width: 18vw;
-    margin-left: 3%;
+    margin-left: 2vw;
     position: relative;
     height: 95%;
     overflow-y: scroll;

@@ -12,13 +12,8 @@ const show_header = document.querySelector('.show-header');
 let i = 1
 add_col.addEventListener('click',()=>{
     if (main.childNodes.length<=5) {
-        if (i<=5) {
             main.appendChild(createCol());
-            // getColor();
             i++;    
-        }else{
-            i=main.childNodes.length+1; 
-        }
     }
 })
 
@@ -77,6 +72,7 @@ function createCol() {
         button.addEventListener('click',()=>{
             if (input.value!="") {
                 h2_title.innerHTML=input.value;
+                col_title.classList.add('has-new-title');
                 col_title.removeChild(input);
                 col_title.removeChild(button);
             }
@@ -112,14 +108,12 @@ function createCol() {
 function refresh() {
     const listTitles = document.querySelectorAll('.col-title');
     listTitles.forEach((col_title,i) => {
-            col_title.firstChild.innerHTML = 'Colonne '+(i+1);
-        }); 
-    }
-    
-function getColor() {
-    for (let i = 0; i < main.children.length; i++) {
-            main.children[i].classList.add('color'+i);        
-    }
+        let h2_title = col_title.firstChild
+        if (!col_title.classList.contains('has-new-title')) {
+            col_title.firstChild.innerHTML = 'Colonne '+(i+1); 
+        }
+    }); 
 }
+    
 
             
