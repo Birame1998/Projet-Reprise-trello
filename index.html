@@ -1,23 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Trello's Project</title>
-</head>
-<body>
-    <header>
-        <div class="add">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <title>Trello's Project</title>
+    </head>
+    <body>
+        <header>
+            <div class="add">
             <div class="add-colonne"><span>+ Colonne</span></div>
             <div class="add-note"><span>+ Note</span></div>
+            <button class="show-header">Afficher menu</button>
         </div>
-        <img src="img/Logobmd.png" alt="">
+        <div class="buttons-edit">
+            <i class="fa-solid fa-trash-can contain-deleted-tasks"></i>
+            <button>Sauvegarder Etat</button>
+            <button>Lister les états</button> 
+            <button>Auto-save</button>
+        </div>
     </header>
     <main></main>
-
-
-<script src="script.js"></script>    
+    <div class="modal">
+        <div class="form-contain">
+            <div class="header-form">
+                <h2>NOUVELLE TACHE</h2>
+                <span class="close-modal">X</span>
+            </div>
+            <div class="task-settings">
+                <span>Remplir les informations de la nouvelle tache</span>
+                <form action="">
+                    <label>Tache</label>
+                    <textarea name="" id="" cols="60" rows="15"></textarea>
+                    <label for="date">Date</label>
+                    <input type="date" name="date" id="date">
+                    <label for="start-time">Heure de début</label>
+                    <input type="time" name="start-time" id="start-time">
+                    <label for="end-time">Heure de fin</label>
+                    <input type="time" name="end-time" id="end-time">
+                    <button type="submit" class="btn-form">Ajouter Tache</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="deleted-tasks">
+        
+    </div>
+    
+    
+    <script src="script.js"></script>    
 </body>
 </html>
