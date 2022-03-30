@@ -18,8 +18,11 @@
         <div class="buttons-edit">
             <i class="fa-solid fa-trash-can contain-deleted-tasks"></i>
             <button>Sauvegarder Etat</button>
-            <button>Lister les états</button> 
-            <button>Auto-save</button>
+            <button>Lister les états</button>
+            <div class="auto-save">
+                <label for="auto-save">Auto-save</label>
+                <input type="checkbox" name="" id="auto-save">
+            </div> 
         </div>
     </header>
     <main></main>
@@ -32,21 +35,39 @@
             <div class="task-settings">
                 <span>Remplir les informations de la nouvelle tache</span>
                 <form action="">
-                    <label>Tache</label>
-                    <textarea name="" id="" cols="60" rows="15"></textarea>
-                    <label for="date">Date</label>
-                    <input type="date" name="date" id="date">
-                    <label for="start-time">Heure de début</label>
-                    <input type="time" name="start-time" id="start-time">
-                    <label for="end-time">Heure de fin</label>
-                    <input type="time" name="end-time" id="end-time">
-                    <button type="submit" class="btn-form">Ajouter Tache</button>
+                    <div class="content">
+                        <label>Tache</label>
+                        <textarea name="" id="content" cols="60" rows="15"  class="task-setting"></textarea>
+                        <span></span>
+                    </div>
+                    <div class="date">
+                        <label for="date">Date</label>
+                        <input type="date" name="date" id="date" class="task-setting">
+                        <span></span>
+                    </div>
+                    <div class="start">
+                        <label for="start-time">Heure de début</label>
+                        <input type="time" name="start-time" id="start-time" class="task-setting">
+                        <span></span>
+                    </div>
+                    <div class="end">
+                        <label for="end-time">Heure de fin</label>
+                        <input type="time" name="end-time" id="end-time" class="task-setting">
+                        <span></span>
+                    </div>
+                    <input type="submit" value="Ajouter tache" class="add-tasks"> 
                 </form>
             </div>
         </div>
     </div>
-    <div class="deleted-tasks">
-        
+    <div class="col deleted-tasks">
+        <div class="col-title">
+            <h2>Taches supprimées</h2>
+            <span class="close-deleted-tasks">x</span>
+        </div>
+        <div class="task-contain">
+            <img src="img/bmd.png" alt="" srcset="">
+        </div>
     </div>
     
     

@@ -24,9 +24,10 @@ header{
     display: flex;
     position: relative;
     transform: translateY(-100%);
-       justify-content: space-between;
+    justify-content: space-between;
     align-items: center;
     font-size: 1.5rem;
+    transition: transform 1s ease;
 }
 .visible-header{
     transform: translateY(0);
@@ -76,6 +77,13 @@ header{
     background-color:rgb(241, 209, 203);
     color: rgb(90, 88, 88);
 }
+.buttons-edit input{
+    height: 2vh;
+}
+.buttons-edit label{
+    background-color: rgba(0,160,150,0.5);
+    color: white;
+}
 header span{
     margin-left: 5px;
 }
@@ -106,6 +114,8 @@ main{
 }
 .col-title{
     position: relative;
+    background-color:rgba(0,0,0,0.3);
+    color: white;
     flex: 1;
     border-bottom: solid 1px;
     text-align: center;
@@ -225,16 +235,17 @@ main{
     margin-top: 15px;
 }
 .task-settings textarea{
-    max-width: 100%;
-    min-width: 100%;
+    max-width: 90%;
+    min-width: 90%;
+    margin-left: 10px;
     border: solid 1px;
-    min-height: 18vh;
-    max-height: 18vh;
+    min-height: 15vh;
+    max-height: 15vh;
 }
 .task-settings form{
     margin-top: 30px;
 }
-.task-settings input{
+.task-setting{
     border-radius: 8px;
     border: 1px solid;
     margin-left: 10px;
@@ -246,6 +257,22 @@ form{
     display: flex;
     flex-direction: column;
 }
+.content{
+    display: flex;
+    flex-direction: column;
+}
+.date{
+    display: flex;
+    flex-direction: column;
+}
+.start{
+    display: flex;
+    flex-direction: column;
+}
+.end{
+    display: flex;
+    flex-direction: column;
+}
 form label{
     margin-left: 10px;
 }
@@ -254,33 +281,36 @@ form label{
     animation-duration: 1s;
     animation-name: modal-animation;
 }
-form button{
+.add-tasks{
     border: 1px solid;
     cursor: pointer;
     border-radius: 5px;
-    height: 3vh;
-    width: 20%;
+    height: 2vh;
+    width: fit-content;
     background-color: green;
     color: white;
     position: absolute;
-    bottom: 2%;
+    bottom: 0;
     left: 50%;
     transform: translate(-50%,-50%);
 }
+form span{
+    margin-left: 10px;
+    color: red;
+    font-style: italic;
+}
 .deleted-tasks{
-    border: solid 1px white;
-    height: 100%;
-    width: 30%;
-    background-color: white;
     overflow-y: scroll;
+    background-color: aliceblue;
     position: absolute;
     right: 0;
-    transform: translateX(102%);
+    transform: translateX(105%);
+    transition: transform 1s ease;
 }
 
 
 .actived-deleted-tasks{
-    transform: translateX(1%);
+    transform: translateX(2%);
     transition: transform 1s ease;
 }
 .show-header{
@@ -299,7 +329,7 @@ form button{
 .col {
     animation-duration: 1s;
     animation-name: col-animation;
-  }
+  }  
   
   @keyframes col-animation {
     from {      
