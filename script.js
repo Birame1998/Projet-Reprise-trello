@@ -8,6 +8,7 @@ const add_tasks = document.querySelector('.add-tasks');
 const close_modal = document.querySelector('.close-modal');
 const containDeletedTasks = document.querySelector('.contain-deleted-tasks');
 const deletedTasks = document.querySelector('.deleted-tasks')
+const deletedTask = document.querySelector('.deleted-task')
 const show_header = document.querySelector('.show-header');
 const content = document.querySelector('.content');
 const date = document.querySelector('.date');
@@ -63,11 +64,7 @@ add_tasks.addEventListener('click',(e)=>{
     }else{
         var new_date = task_date.valueAsNumber+now.getHours()*3600000+now.getMinutes()*60000+now.getSeconds()*1000+now.getMilliseconds(); 
         var new_task_date = (task_start.valueAsNumber)+now.getSeconds()*1000+now.getMilliseconds();
-        var nowTime = now.getHours()*3600000+now.getMinutes()*60000+now.getSeconds()*1000+now.getMilliseconds() 
-        console.log((task_start.valueAsNumber)+now.getSeconds()*1000+now.getMilliseconds());
-        console.log(now.getHours()*3600000+now.getMinutes()*60000+now.getSeconds()*1000+now.getMilliseconds());
-        console.log(now.getTime());
-        console.log(new_date==now)
+        var nowTime = now.getHours()*3600000+now.getMinutes()*60000+now.getSeconds()*1000+now.getMilliseconds(); 
         if (new_date<now) {
             e.preventDefault();
             showError(date,task_date,"Veuilez saisir une date ultérieure ou égale à celle actuelle");
@@ -84,75 +81,189 @@ add_tasks.addEventListener('click',(e)=>{
         if (task_end.value!="" && task_start.value!="") {
             if (task_start.value>task_end.value) {
                 e.preventDefault();
-            showError(start,task_start,"Veuillez prendre une heure de début antérieure à celle de fin");
-            showError(end,task_end,"Veuillez prendre une heure de fin ultérieure à celle de début");
+                showError(start,task_start,"Veuillez prendre une heure de début antérieure à celle de fin");
+                showError(end,task_end,"Veuillez prendre une heure de fin ultérieure à celle de début");
+            }
+            
         }
-        
     }
-}
-if (task_end.value=="") {
-    e.preventDefault()
-    showError(end,task_end,"Veuillez remplir le champ");
-}
-if (!hasError()) {   
-    main.firstChild.childNodes[1].appendChild(createTask());
-    showTask();
-    modal.classList.remove('active-modal');
-    clean();
+    if (task_end.value=="") {
+        e.preventDefault()
+        showError(end,task_end,"Veuillez remplir le champ");
+    }
+    if (!hasError()) {   
+        main.firstChild.childNodes[1].appendChild(createTask());
+        modal.classList.remove('active-modal');
+        clean();
 }
 })
 
 
 
 
-function createTask() {
-    let k = main.childNodes[i].childElementCount
-    divTask = document.createElement('div');
-    divTask.className='div-task';
-    containDivTask = document.createElement('div');
-    containDivTask.className = 'contain-div-task';
-    spanTaskContent = document.createElement('span');
-    spanTaskContent.className = "task-content";
-    spanTaskContent.innerHTML = task_content.value;
-    spanTaskDate = document.createElement('span');
-    spanTaskDate.innerHTML='Date : '+task_date.value;
-    spanTaskStart = document.createElement('span');
-    spanTaskStart.innerHTML = 'Heure de début : '+task_start.value;
-    spanTaskEnd = document.createElement('span');
-    spanTaskEnd.innerHTML = 'Heure de fin : '+task_end.value;
+// function createTask() {
+//     divTask = document.createElement('div');
+//     divTask.className='div-task';
+//     containDivTask = document.createElement('div');
+//     containDivTask.className = 'contain-div-task';
     
+//     spanTaskContent = document.createElement('span');
+//     spanTaskContent.innerHTML = task_content.value;
+//     spanTaskContent.className = "task-content";
+    
+//     spanTaskDate = document.createElement('span');
+//     spanTaskDate.innerHTML='Date : '+task_date.value;
+//     spanTaskDate.className = 'span-task-date';
+
+//     spanTaskStart = document.createElement('span');
+//     spanTaskStart.innerHTML = 'Heure de début : '+task_start.value;
+//     spanTaskStart.className = 'span-task-start';
+    
+//     spanTaskEnd = document.createElement('span');
+//     spanTaskEnd.innerHTML = 'Heure de fin : '+task_end.value;
+//     spanTaskEnd.className = 'span-task-end';
+    
+//     iconTrash = document.createElement('i');
+//     iconTrash.className ='fa-solid fa-trash-can';
+    
+//     iconEdit = document.createElement('i');
+//     iconEdit.className = 'fa-solid fa-pen';
+    
+//     arrowLeft = document.createElement('i');
+//     arrowLeft.className='fa-solid fa-circle-arrow-left';
+//     arrowLeft.classList.add('arrow-left');
+    
+//     arrowRight = document.createElement('i');
+//     arrowRight.className='fa-solid fa-circle-arrow-right';
+//     arrowRight.classList.add('arrow-right');    
+    
+//     visibleDivTask = document.createElement('div');
+//     visibleDivTask.appendChild(spanTaskContent);
+//     visibleDivTask.appendChild(iconEdit);
+//     visibleDivTask.appendChild(iconTrash);
+//     visibleDivTask.className = 'visible-div-task';
+    
+//     hiddenDivTask = document.createElement('div');
+//     hiddenDivTask.className = 'hidden-div-task';                  
+//     hiddenDivTask.appendChild(spanTaskDate);
+//     hiddenDivTask.appendChild(spanTaskStart);
+//     hiddenDivTask.appendChild(spanTaskEnd);
+    
+//     containDivTask.appendChild(visibleDivTask);
+//     containDivTask.appendChild(hiddenDivTask);       
+        
+//     divTask.appendChild(arrowLeft);
+//     divTask.appendChild(containDivTask);
+//     divTask.appendChild(arrowRight);
+    
+//     })
+//     containDivTask.addEventListener('dblclick',(e)=>{
+//         var column = e.target.parentElement.parentElement.parentElement;
+//         var n = parseInt(column.id);
+//         var deletedTasks = document.getElementById(8);
+//         deletedTasks.lastChild.appendChild(e.target.parentElement);
+//     })
+//     return divTask;
+// }
+
+function createTask() {
+    var divIcons  = document.createElement('div');
+    divIcons.className='div-icons'; 
+    
+    iconTrash = document.createElement('i');
+    iconTrash.className ='fa-solid fa-trash-can';
+    iconEdit = document.createElement('i');
+    iconEdit.className = 'fa-solid fa-pen';
+    
+    divIcons.appendChild(iconEdit);
+    divIcons.appendChild(iconTrash);
+
+    var taskArea = document.createElement('textarea');
+    taskArea.className='task-area';
+    taskArea.value = task_content.value;
+
+
+    var divTask = document.createElement('div');
+    divTask.className='div-task';
+
     arrowLeft = document.createElement('i');
     arrowLeft.className='fa-solid fa-circle-arrow-left';
     arrowLeft.classList.add('arrow-left');
+    
     arrowRight = document.createElement('i');
     arrowRight.className='fa-solid fa-circle-arrow-right';
-    arrowRight.classList.add('arrow-right');
+    arrowRight.classList.add('arrow-right');    
     
-    visibleDivTask = document.createElement('div');
-    visibleDivTask.className = 'visible-div-task';
-    visibleDivTask.appendChild(spanTaskContent);
-    containDivTask.appendChild(visibleDivTask);       
     
-        
+    hideTask = document.createElement('div');
+    hideTask.className = 'hide-task';
+
+    span_date = document.createElement('span');
+    span_date.innerHTML = 'Date : '+ task_date.value
+    span_date.className = 'span-date'; 
     
+    span_start = document.createElement('span');
+    span_start.innerHTML = 'Start : '+ task_start.value
+    span_start.className = 'span-start'; 
+
+    
+    span_end = document.createElement('span');
+    span_end.innerHTML = 'End : '+ task_end.value
+    span_end.className = 'span-end'; 
+
+    hideTask.appendChild(span_date)
+    hideTask.appendChild(span_start)
+    hideTask.appendChild(span_end);
+     
+    divTask.appendChild(taskArea);
+    divTask.appendChild(divIcons);
     divTask.appendChild(arrowLeft);
-    divTask.appendChild(containDivTask);
     divTask.appendChild(arrowRight);
-    
+    divTask.appendChild(hideTask);
+
     arrowRight.addEventListener('click',(e)=>{
             var column = e.target.parentElement.parentElement.parentElement;
             var n = parseInt(column.id);
             var next_column = document.getElementById(n+1);
             next_column.lastChild.appendChild(e.target.parentElement);
             
-    })
+    });
     arrowLeft.addEventListener('click',(e)=>{
         
             var column = e.target.parentElement.parentElement.parentElement;
             var n = parseInt(column.id);
             var next_column = document.getElementById(n-1);
             next_column.lastChild.appendChild(e.target.parentElement);
-    })
+        });
+        iconTrash.addEventListener('click',(e)=>{
+            var column = e.target.parentElement.parentElement.parentElement.parentElement;
+            if (confirm('Voulez-vous supprimer cette tache ?') && column.contains(e.target.parentElement.parentElement)) {   
+                deletedTask.appendChild(e.target.parentElement.parentElement);
+            }
+            if (deletedTask.contains(e.target.parentElement.parentElement)) {
+                e.target.parentElement.parentElement.addEventListener('dblclick',()=>{
+                    if (confirm('Voulez-vous restaurer cette tache ?')) {
+                    if (document.body.contains(column)) {
+                                column.lastChild.appendChild(e.target.parentElement.parentElement)    
+                            }
+                        }else{
+                            main.firstChild.lastChild.appendChild(e.target.parentElement.parentElement);
+                    }
+                    
+                })
+            }
+        })
+
+
+
+
+
+
+
+    
+    showTask(divTask,hideTask);    
+
+
     return divTask;
 }
 
@@ -166,24 +277,10 @@ function createTask() {
 
 
 
-
-function showTask() {
-    var containDivTasks = document.querySelectorAll('.contain-div-task');
-    containDivTasks.forEach(containDivTask => {
-        containDivTask.addEventListener('mouseover',()=>{
-            divTask = containDivTask.parentNode;
-            let k = divTask.parentNode.childElementCount; 
-            divTask.classList.toggle('complete-task');
-            var hiddenDivTask = document.createElement('div');
-            hiddenDivTask.className='hidden-div-task';
-            hiddenDivTask.appendChild(spanTaskDate);
-            hiddenDivTask.appendChild(spanTaskStart);
-            hiddenDivTask.appendChild(spanTaskEnd);
-            if (divTask.classList.contains('complete-task')) {
-                containDivTask.appendChild(hiddenDivTask);
-            }
-        })
-    });
+function showTask(divTask,hideTask) {
+  divTask.addEventListener('mouseover',()=>{
+      hideTask.classList.toggle('complete-task');
+  })
 }
 
 
@@ -307,6 +404,12 @@ function showError(div,field,message) {
     div.appendChild(spanError);
     removeError();
     }
+    
+    
+    
+    
+    
+    
     function removeError() {
         spanErrors = document.querySelectorAll('.span-error');
         spanErrors.forEach(element => {
