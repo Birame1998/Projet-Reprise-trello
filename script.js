@@ -180,7 +180,8 @@ function createTask() {
 
     var taskArea = document.createElement('textarea');
     taskArea.className='task-area';
-    taskArea.value = task_content.value;
+    var taskDesc = task_content.value
+    taskArea.value = taskDesc;
 
 
     var divTask = document.createElement('div');
@@ -199,16 +200,19 @@ function createTask() {
     hideTask.className = 'hide-task';
 
     span_date = document.createElement('span');
-    span_date.innerHTML = 'Date : '+ task_date.value
+    var taskDate = task_date.value;
+    span_date.innerHTML = 'Date : '+ taskDate;
     span_date.className = 'span-date'; 
     
     span_start = document.createElement('span');
-    span_start.innerHTML = 'Start : '+ task_start.value
+    var taskStart = task_start.value;
+    span_start.innerHTML = 'Start : '+ taskStart;
     span_start.className = 'span-start'; 
 
     
     span_end = document.createElement('span');
-    span_end.innerHTML = 'End : '+ task_end.value
+    var taskEnd = task_end.value;
+    span_end.innerHTML = 'End : '+ taskEnd;
     span_end.className = 'span-end'; 
 
     hideTask.appendChild(span_date)
@@ -237,7 +241,7 @@ function createTask() {
         });
         iconTrash.addEventListener('click',(e)=>{
             var column = e.target.parentElement.parentElement.parentElement.parentElement;
-            if (confirm('Voulez-vous supprimer cette tache ?') && column.contains(e.target.parentElement.parentElement)) {   
+            if (confirm('Voulez-vous supprimer cette tache ?')) {   
                 deletedTask.appendChild(e.target.parentElement.parentElement);
             }
             if (deletedTask.contains(e.target.parentElement.parentElement)) {
@@ -253,6 +257,18 @@ function createTask() {
                 })
             }
         })
+        iconEdit.addEventListener('click',()=>{
+            modal.classList.add('active-modal');
+            task_content.value = taskDesc;
+            task_date.value = taskDate;
+            task_start.value = taskStart;
+            task_end.value = taskEnd;
+            add_tasks.addEventListener('click',(e)=>{
+                if (!hasError()) {
+                    divTask.remove();
+                }
+            });
+        });
 
 
 
